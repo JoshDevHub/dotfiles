@@ -95,8 +95,3 @@ old_pr() {
   pull_url="$(g_remote_url)/compare/$base_branch...$compare_branch"
   google-chrome $pull_url
 }
-
-tp() {
-  current_project=$(basename "$(pwd)")
-  task "project:$current_project" "$@"
-}
