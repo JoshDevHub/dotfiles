@@ -95,3 +95,17 @@ old_pr() {
   pull_url="$(g_remote_url)/compare/$base_branch...$compare_branch"
   google-chrome $pull_url
 }
+
+scratch() {
+  tmux split-window -h "nvim ~/Documents/todo/scratch.md"
+}
+
+todo() {
+  formatted_date="$(date +%Y)_$(date +%m)_$(date +%d)"
+  tmux split-window -h "nvim ~/Documents/todo/dailies/$formatted_date.md"
+}
+
+proj() {
+  project="$(basename $PWD)"
+  tmux split-window -h "nvim ~/Documents/todo/projects/$project"
+}
