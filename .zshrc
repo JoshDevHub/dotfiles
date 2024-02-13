@@ -23,14 +23,3 @@ function tilde_files() {
   find $1 -type f -name "*.md" -exec grep -l "~~~" {} \;
 }
 
-function mdlint() {
-  lesson_basename=$(basename "$1")
-  if [[ "$lesson_basename" == project* ]]; then
-    lesson_type="project"
-  else
-    lesson_type="lesson"
-  fi
-
-  config_file="${lesson_type}.markdownlint-cli2.jsonc"
-  markdownlint-cli2 --config "$config_file" "$1"
-}
