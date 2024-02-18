@@ -1,0 +1,12 @@
+format = """
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$line_break\
+$character"""
+
+[character]
+success_symbol = '[➜](bold green)'
+vimcmd_symbol = '[vi](bold green)'
+
