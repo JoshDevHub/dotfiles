@@ -9,4 +9,4 @@ $character"""
 [character]
 success_symbol = '[➜](bold green)'
 vimcmd_symbol = '[vi](bold green)'
-
+error_symbol = '[➜](bold red)'
