@@ -4,6 +4,7 @@ My dotfiles. Contains my configurations for the following tools:
 
 - zsh
 - alacritty
+- starship
 - tmux
 - neovim
 - i3
