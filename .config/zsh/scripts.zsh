@@ -1,19 +1,19 @@
 # builds co-author git commit with fuzzy search for author
-co_author() {
+function co_author() {
   commit_msg=$1
   author_info=$(git log --format="%aN <%aE>" | sort -u | fzf)
 
   git commit -m $commit_msg -m "Co-authored-by: $author_info"
 }
 
-snap_clean() {
+function snap_clean() {
   sudo snap list --all | awk '/disabled/{print $1, $3}' |
     while read snapname revision; do
       snap remove "$snapname" --revision=$revision
     done
 }
 
-tclone() {
+function tclone() {
   repo_ssh_url=$1
   workspace=$2
 
@@ -32,12 +32,12 @@ tclone() {
 }
 
 # kills process for given port number
-kill_port() {
+function kill_port() {
   port_num=$1
   lsof -ti :$port_num | xargs kill -9
 }
 
-g_remote_url() {
+function g_remote_url() {
   remote=$1
   if [ "$remote" = "og" ]; then
     ssh_remote=$(git remote -v | head -n 1 | awk -F " " '{print $2}')
@@ -58,7 +58,7 @@ g_remote_url() {
   fi
 }
 
-web_repo() {
+function web_repo() {
   remote_url=$(g_remote_url $1)
 
   if [ -z "$remote_url" ]; then
@@ -68,7 +68,7 @@ web_repo() {
   firefox $remote_url
 }
 
-open_pr() {
+function open_pr() {
   compare_branch=$(git branch --show-current)
   upstream_url=$(g_remote_url up)
   base_branch=${1:-"main"}
@@ -83,31 +83,25 @@ open_pr() {
   firefox $pull_url
 }
 
-old_pr() {
-  compare_branch=$(git branch --show-current)
-
-  if [ $# -eq 0 ]; then
-    base_branch="main"
-  else
-    base_branch=$1
-  fi
-
-  pull_url="$(g_remote_url)/compare/$base_branch...$compare_branch"
-  google-chrome $pull_url
-}
-
-scratch() {
+function scratch() {
   tmux split-window -h "nvim ~/Documents/todo/scratch.md"
 }
 
-todo() {
+function todo() {
   formatted_date="$(date +%Y)_$(date +%m)_$(date +%d)"
   tmux split-window -h "nvim ~/Documents/todo/dailies/$formatted_date.md"
 }
 
-proj() {
+function proj() {
   project="$(basename $PWD)"
-  tmux split-window -h "nvim ~/Documents/todo/projects/$project"
+  git_branch=$(git branch --show-current)
+  if [[ "$git_branch" == main || "$git_branch" == master ]]; then
+    filename=NOTES.md
+  else
+    filename="$git_branch.md"
+  fi
+
+  tmux split-window -h "nvim ~/Documents/todo/projects/$project/$filename"
 }
 
 function mdlint() {
