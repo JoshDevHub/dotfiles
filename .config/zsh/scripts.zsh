@@ -106,6 +106,7 @@ function proj() {
 
 function mdlint() {
   target_file=$1
+  opts=${@:2}
   if [[ $(basename "$target_file") == project* ]]; then
     content_type="project"
   else
@@ -113,5 +114,5 @@ function mdlint() {
   fi
 
   config_file="${content_type}.markdownlint-cli2.jsonc"
-  markdownlint-cli2 --config "$config_file" "$target_file"
+  markdownlint-cli2 --config "$config_file" "$target_file" "$opts"
 }
