@@ -92,6 +92,12 @@ function todo() {
   tmux split-window -h "nvim ~/Documents/todo/dailies/$formatted_date.md"
 }
 
+function hours() {
+  filename="$(date +%Y)_$(date +%m).md"
+  project_name="$(basename $PWD)"
+  tmux split-window -h "nvim ~/Documents/todo/projects/$project_name/hours/$filename"
+}
+
 function proj() {
   project="$(basename $PWD)"
   git_branch=$(git branch --show-current)
