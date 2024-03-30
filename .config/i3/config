@@ -215,8 +215,8 @@ workspace 2 output DVI-I-1
 workspace 9 output HDMI-1
 
 # init programs
-assign [class="google-chrome"] $ws1
-exec --no-startup-id google-chrome
+assign [class="firefox"] $ws1
+exec --no-startup-id firefox
 
 assign [class="discord"] $ws2
 exec --no-startup-id discord
