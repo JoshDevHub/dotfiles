@@ -109,16 +109,3 @@ function proj() {
 
   tmux split-window -h "nvim ~/Documents/todo/projects/$project/$filename"
 }
-
-function mdlint() {
-  target_file=$1
-  opts=${@:2}
-  if [[ $(basename "$target_file") == project* ]]; then
-    content_type="project"
-  else
-    content_type="lesson"
-  fi
-
-  config_file="${content_type}.markdownlint-cli2.jsonc"
-  markdownlint-cli2 --config "$config_file" "$target_file" "$opts"
-}
