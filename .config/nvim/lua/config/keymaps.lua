@@ -24,10 +24,10 @@ vim.keymap.set("v", "<leader>p", '"_dP')
 
 vim.keymap.set("n", "<A-a>", "<C-a>")
 
-vim.api.nvim_create_user_command("Rspec", function(input)
-  local test_cmd = "bundle exec rspec " .. input.args
-  vim.api.nvim_cmd({
-    cmd = "terminal",
-    args = { test_cmd },
-  }, {})
-end, { nargs = "*" })
+local function copy_rel_path()
+  local path = vim.fn.expand("%")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied " .. path .. " to the clipboard!")
+end
+vim.keymap.set("n", "<leader>fy", copy_rel_path, build_opts("copy-rel-path"))
+
