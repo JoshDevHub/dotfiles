@@ -53,6 +53,10 @@ return {
             setup_diagnostics(client, buffer)
           end,
         },
+        stimulus_ls = {
+          cmd = { "stimulus-language-server", "--stdio" },
+          filetypes = { "html", "eruby" },
+        },
       },
     },
   },
