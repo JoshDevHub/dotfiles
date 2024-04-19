@@ -43,6 +43,7 @@ end
 return {
   {
     "neovim/nvim-lspconfig",
+    commit = "0351909f2b571f1645b347aedddc45c74b7ff062",
     ---@class PluginLspOpts
     opts = {
       ---@type lspconfig.options
