@@ -11,6 +11,8 @@ alias bex="bundle exec"
 alias cov="firefox coverage/index.html"
 alias odev="overmind start -f Procfile.dev"
 alias oweb="overmind connect web"
+alias g_routes="bin/rails routes > routes.txt"
+alias fz_routes="cat routes.txt | fzf"
 
 # Dotfile mgmt
 alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
