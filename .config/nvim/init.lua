@@ -89,6 +89,9 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+-- leave insert mode
+vim.keymap.set('i', "<C-c>", "<Esc>")
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -134,6 +137,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-rails',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -741,7 +745,7 @@ require('lazy').setup({
       end
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_filename = function()
-        return vim.fn.getreg('%')
+        return vim.fn.expand("%:.")
       end
 
       -- ... and there is more!
