@@ -69,17 +69,15 @@ function web_repo() {
 }
 
 function open_pr() {
-  compare_branch=$(git branch --show-current)
-  upstream_url=$(g_remote_url up)
-  base_branch=${1:-"main"}
+  topic_branch=$(git branch --show-current)
+  origin_remote_url=$(g_remote_url og)
 
-  if [ -z $upstream_url ]; then
-    pull_url="$(g_remote_url og)/compare/$base_branch...$compare_branch"
-  else
-    compare_origin="JoshDevHub:$(basename $PWD)"
-    pull_url="$upstream_url/compare/$base_branch...$compare_origin:$compare_branch"
+  if [[ -z $origin_remote_url ]] then
+    echo "no origin remote exists in this repository"
+    return 1
   fi
 
+  pull_url="$origin_remote_url/pull/new/$topic_branch"
   firefox $pull_url
 }
 
