@@ -38,28 +38,15 @@ function kill_port() {
 }
 
 function g_remote_url() {
-  remote=$1
-  if [ "$remote" = "og" ]; then
-    ssh_remote=$(git remote -v | head -n 1 | awk -F " " '{print $2}')
-  elif [ "$remote" = "up" ]; then
-    ssh_remote=$(git remote -v | grep upstream | grep -v -e fetch | awk -F " " '{print $2}')
-  else
-    echo "Must pass in a remote name" >&2
-    return 1
-  fi
-
+  ssh_remote=$(git remote -v | head -n 1 | awk -F " " '{print $2}')
   url_without_ext="${ssh_remote%.git}"
   repo_path="${url_without_ext#*:}"
 
-  if [ -z $repo_path ]; then
-    echo ""
-  else
-    echo "https://github.com/$repo_path"
-  fi
+  echo "https://github.com/$repo_path"
 }
 
 function web_repo() {
-  remote_url=$(g_remote_url $1)
+  remote_url=$(g_remote_url)
 
   if [ -z "$remote_url" ]; then
     return 1
@@ -70,7 +57,7 @@ function web_repo() {
 
 function open_pr() {
   topic_branch=$(git branch --show-current)
-  origin_remote_url=$(g_remote_url og)
+  origin_remote_url=$(g_remote_url)
 
   if [[ -z $origin_remote_url ]] then
     echo "no origin remote exists in this repository"
