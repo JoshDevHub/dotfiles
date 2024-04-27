@@ -269,6 +269,13 @@ require('lazy').setup({
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
         -- },
+        defaults = {
+          mappings = {
+            i = {
+              ["<c-c>"] = { "<esc>", type = "command" },
+            },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
