@@ -13,10 +13,7 @@ end
 
 local keymap = vim.api.nvim_set_keymap
 
-keymap("i", "jk", "<ESC>", build_opts())
-keymap("i", "jj", "<ESC>", build_opts())
-
-vim.opt.timeoutlen = 300
+keymap("i", "<C-c>", "<ESC>", build_opts())
 
 vim.keymap.set("n", "<leader>gl", require("gitsigns").blame_line, build_opts("git-blame"))
 vim.keymap.set("n", "<leader>gt", require("gitsigns").stage_hunk, build_opts("stage-hunk"))

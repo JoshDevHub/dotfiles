@@ -43,12 +43,11 @@ end
 return {
   {
     "neovim/nvim-lspconfig",
-    commit = "0351909f2b571f1645b347aedddc45c74b7ff062",
     ---@class PluginLspOpts
     opts = {
       ---@type lspconfig.options
       servers = {
-        ruby_ls = {
+        ruby_lsp = {
           cmd = { os.getenv("HOME") .. "/.rbenv/shims/ruby-lsp", "stdio" },
           on_attach = function(client, buffer)
             setup_diagnostics(client, buffer)
