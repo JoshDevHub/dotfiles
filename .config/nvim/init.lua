@@ -92,6 +92,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- leave insert mode
 vim.keymap.set('i', "<C-c>", "<Esc>")
 
+-- better indents
+vim.keymap.set('v', '<', "<gv", { desc = 'Indent Left' })
+vim.keymap.set('v', '>', ">gv", { desc = 'Indent Right' })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
