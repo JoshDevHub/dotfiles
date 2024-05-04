@@ -209,6 +209,9 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 # Set background image
 exec_always --no-startup-id feh --bg-scale ~/Pictures/tranquil_lake.jpg
 
+# set audio to headphones
+exec --no-startup-id pactl set-default-sink 3
+
 # Set Workspaces to Monitors
 workspace 1 output DVI-I-1
 workspace 2 output DVI-I-1
