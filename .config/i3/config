@@ -127,11 +127,6 @@ bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
 
-bindsym $mod+u workspace number $ws1
-bindsym $mod+i workspace number $ws2
-bindsym $mod+o workspace number $ws10
-bindsym $mod+p workspace number $ws9
-
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -143,6 +138,10 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# move workspace to output
+bindsym $mod+Control+h move workspace to output left
+bindsym $mod+Control+l move workspace to output right
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -224,5 +223,5 @@ exec --no-startup-id firefox
 assign [class="discord"] $ws2
 exec --no-startup-id discord
 
-assign [class="alacritty"] $ws9
+assign [class="Alacritty"] $ws9
 exec --no-startup-id alacritty
