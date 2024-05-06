@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require "date"
+
+today_date = Date.today
+sunday = today_date - today_date.wday
+
+note_file_name = sunday.to_s.tr('-', '_')
+note_file_path = "~/Documents/todo/dailies/#{note_file_name}.md"
+
+system("tmux split-window -h nvim #{note_file_path}")

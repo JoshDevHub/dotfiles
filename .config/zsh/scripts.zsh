@@ -73,8 +73,7 @@ function scratch() {
 }
 
 function todo() {
-  formatted_date="$(date +%Y)_$(date +%m)_$(date +%d)"
-  tmux split-window -h "nvim ~/Documents/todo/dailies/$formatted_date.md"
+  ~/.local/bin/notes
 }
 
 function hours() {
