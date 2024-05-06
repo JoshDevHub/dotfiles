@@ -90,11 +90,30 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- leave insert mode
-vim.keymap.set('i', "<C-c>", "<Esc>")
+vim.keymap.set('i', '<C-c>', '<Esc>')
 
 -- better indents
-vim.keymap.set('v', '<', "<gv", { desc = 'Indent Left' })
-vim.keymap.set('v', '>', ">gv", { desc = 'Indent Right' })
+vim.keymap.set('v', '<', '<gv', { desc = 'Indent Left' })
+vim.keymap.set('v', '>', '>gv', { desc = 'Indent Right' })
+
+-- test copying
+local function copy_output(fn)
+  return function()
+    vim.fn.setreg('+', fn())
+  end
+end
+
+local function test_file_command()
+  return "bex rspec " .. vim.fn.expand('%:.')
+end
+
+local function test_line_command()
+  local line_num = vim.fn.getpos(".")[2]
+  return test_file_command() .. ":" .. line_num
+end
+
+vim.keymap.set('n', '<leader>tf', copy_output(test_file_command), { desc = 'Test file' })
+vim.keymap.set('n', '<leader>tl', copy_output(test_line_command), { desc = 'Test line' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -110,11 +129,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  group = vim.api.nvim_create_augroup("80_ruler", { clear = true}),
-  pattern = "ruby,javascript,javascriptreact",
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('80_ruler', { clear = true }),
+  pattern = 'ruby,javascript,javascriptreact',
   callback = function()
-    vim.api.nvim_set_option_value("colorcolumn", "80", {})
+    vim.api.nvim_set_option_value('colorcolumn', '80', {})
   end,
 })
 
@@ -201,7 +220,7 @@ require('lazy').setup({
         ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
         ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+        ['<leader>t'] = { name = '[T]est', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
       }
       -- visual mode
@@ -276,11 +295,11 @@ require('lazy').setup({
         defaults = {
           mappings = {
             i = {
-              ["<c-c>"] = { "<esc>", type = "command" },
+              ['<c-c>'] = { '<esc>', type = 'command' },
             },
             n = {
-              ["q"] = require('telescope.actions').close,
-            }
+              ['q'] = require('telescope.actions').close,
+            },
           },
         },
         -- pickers = {}
@@ -309,7 +328,7 @@ require('lazy').setup({
 
       -- Slightly advanced example of overriding default behavior and theme
       -- vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
+      -- You can pass additional configuration to Telescope to change the theme, layout, etc.
       --   builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
       --     winblend = 10,
       --     previewer = false,
@@ -758,7 +777,7 @@ require('lazy').setup({
       end
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_filename = function()
-        return vim.fn.expand("%:.")
+        return vim.fn.expand '%:.'
       end
 
       -- ... and there is more!
@@ -767,32 +786,32 @@ require('lazy').setup({
   },
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
-    dependencies = { "RRethy/nvim-treesitter-endwise" },
+    dependencies = { 'RRethy/nvim-treesitter-endwise' },
     build = ':TSUpdate',
     opts = {
       endwise = { enable = true },
       ensure_installed = {
         'bash',
         'c',
-        "bash",
-        "elixir",
-        "embedded_template",
-        "html",
-        "javascript",
-        "json",
-        "lua",
-        "luadoc",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "query",
-        "regex",
-        "ruby",
-        "tsx",
-        "typescript",
-        "vim",
-        "vimdoc",
-        "yaml",
+        'bash',
+        'elixir',
+        'embedded_template',
+        'html',
+        'javascript',
+        'json',
+        'lua',
+        'luadoc',
+        'markdown',
+        'markdown_inline',
+        'python',
+        'query',
+        'regex',
+        'ruby',
+        'tsx',
+        'typescript',
+        'vim',
+        'vimdoc',
+        'yaml',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
@@ -822,12 +841,12 @@ require('lazy').setup({
     end,
   },
   { -- tmux-vim-split navigation
-    "christoomey/vim-tmux-navigator",
+    'christoomey/vim-tmux-navigator',
     keys = {
-      { "<C-l>", "<cmd>TmuxNavigateRight<cr>" },
-      { "<C-h>", "<cmd>TmuxNavigateLeft<cr>" },
-      { "<C-k>", "<cmd>TmuxNavigateUp<cr>" },
-      { "<C-j>", "<cmd>TmuxNavigateDown<cr>" },
+      { '<C-l>', '<cmd>TmuxNavigateRight<cr>' },
+      { '<C-h>', '<cmd>TmuxNavigateLeft<cr>' },
+      { '<C-k>', '<cmd>TmuxNavigateUp<cr>' },
+      { '<C-j>', '<cmd>TmuxNavigateDown<cr>' },
     },
   },
 
