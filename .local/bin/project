@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+project = File.basename(Dir.getwd)
+git_branch = %x{ git branch --show-current }.strip
+
+trunk_names = %w[main master staging]
+filename = trunk_names.any?(git_branch) ? "NOTES.md" : "#{git_branch}.md"
+
+project_path = File.join(Dir.home, "Documents", "todo", "projects")
+if !Dir.exist?(project_path)
+  Dir.mkdir(project_path)
+end
+
+system(
+  "tmux",
+  "split-window",
+  "-h",
+  "nvim ~/Documents/todo/projects/#{project}/#{filename}"
+)

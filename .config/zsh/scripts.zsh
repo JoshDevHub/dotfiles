@@ -83,13 +83,5 @@ function hours() {
 }
 
 function proj() {
-  project="$(basename $PWD)"
-  git_branch=$(git branch --show-current)
-  if [[ "$git_branch" == main || "$git_branch" == master ]]; then
-    filename=NOTES.md
-  else
-    filename="$git_branch.md"
-  fi
-
-  tmux split-window -h "nvim ~/Documents/todo/projects/$project/$filename"
+  ~/.local/bin/project
 }
