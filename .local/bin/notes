@@ -8,4 +8,17 @@ sunday = today_date - today_date.wday
 note_file_name = sunday.to_s.tr('-', '_')
 note_file_path = "~/Documents/todo/dailies/#{note_file_name}.md"
 
+def create_paths_if_nonexistant(*paths)
+  paths.each do |path|
+    next if Dir.exist?(path)
+
+    Dir.mkdir(path)
+  end
+end
+
+create_paths_if_nonexistant(
+  File.join(Dir.home, "Documents", "todo"),
+  File.join(Dir.home, "Documents", "todo", "dailies")
+)
+
 system("tmux split-window -h nvim #{note_file_path}")
