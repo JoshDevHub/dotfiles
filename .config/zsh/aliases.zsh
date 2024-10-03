@@ -20,3 +20,6 @@ alias dotfiles="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 # NeoVim
 alias vim="~/nvim.appimage"
 alias fvim='nvim "$(fzf)"'
+
+# Personal
+alias books="tmux split-window -h 'nvim ~/Documents/todo/books.md'"
