@@ -73,7 +73,7 @@ function scratch() {
 }
 
 function todo() {
-  ~/.local/bin/notes
+  tmux split-window -h "nvim ~/Documents/todo/list.md"
 }
 
 function hours() {
